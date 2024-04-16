@@ -51,7 +51,7 @@ extern unsigned _Cdecl _stklen = 9*1024u;	/* TC/BC specific	*/
 
 LOCAL byte recurse = 0;
 LOCAL ATTR useattr = ALL_FILE;
-LOCAL ATTR attr_keep = ~0u, attr_set = 0;
+LOCAL ATTR attr_keep = (ATTR)~0u, attr_set = 0;
 
 LOCAL ATTR findattr;
 LOCAL char path [PATHLEN+4],			/* 4=strlen("\\*.*")	*/
@@ -91,7 +91,7 @@ LOCAL void PROC error	(byte errcode, const char arg[], const char err[]);
 /*======================================================================*/
 
 LOCAL char *PROC adds (char dst[], const char src[]) {
-	return stpcpy (dst, src);
+	return strcpy (dst, src) + strlen (src);
 }
 
 LOCAL ATTR PROC attr2str (char attr_str[], ATTR attr) {
